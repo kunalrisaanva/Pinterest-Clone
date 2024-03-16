@@ -1,0 +1,13 @@
+{
+  "name": "pinterest-clone",
+  "version": "1.0.0",
+  "description": "pinterest-clone",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node"
+  },
+  "keywords": ["node" , "javascript " , "pinterest clone"],
+  "author": "kunalrisaanva12@gmail.com",
+  "license": "ISC"
+}
