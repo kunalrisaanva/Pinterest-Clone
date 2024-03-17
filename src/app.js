@@ -6,20 +6,13 @@ const app = express()
 app.set('view engine', 'ejs');
 
 app.get("/test",function(req,res) {
-    res.send("test")
+    res.render("test")
 })
 
+// routes 
+import userRouter from "./routes/user.routes.js";
 
-
-app.get("/",async function(req,res) {
-
-    res.render('index')
-
-})
-
-
-
-
+app.use(userRouter)
 
 
 export { app }

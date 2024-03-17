@@ -1,10 +1,11 @@
 import { Router } from "express";
+import { renderHomePage } from "../controllers/user.controller.js";
 
 const router = Router();
 
 
-router.route("/").get()
+router.route("/").get(renderHomePage)
 
 
-export { router }
+export default router 
 
