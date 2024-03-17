@@ -7,12 +7,18 @@ const renderHomePage = asyncHandler( async(req,res) => {
 
 
 const renderRegisterPage = asyncHandler( async(req,res) => {
-    res.send("hello world")
+    res.render("register")
+}) 
+
+
+const renderProfilePage = asyncHandler( async(req,res) => {
+    res.render("profile")
 }) 
 
 
 
 export {
     renderHomePage,
-    renderRegisterPage
+    renderRegisterPage,
+    renderProfilePage
 }
