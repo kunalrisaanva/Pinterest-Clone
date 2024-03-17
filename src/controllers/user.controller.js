@@ -1,8 +1,8 @@
-import { asyncHandler } from "../utils/asynchHandler";
+import { asyncHandler } from "../utils/asynchHandler.js";
 import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import { User } from "../models/user.model.js";
-
+import { uploadOnCloudinary } from "../utils/cloudinaryUpload.js";
 
 
 const registerUser = asyncHandler( async(req,res) => {
@@ -23,7 +23,20 @@ const registerUser = asyncHandler( async(req,res) => {
 })
 
 
+const fileUpload = asyncHandler(async (req,res) => {
+
+    //todo: save inito cloudinary 
+
+    const user = await User.findOne({username:req.session.passport.user});
+
+    user.profileImage = req.file?.filename
+
+    user.save({validateBeforeSave:false});
+
+    res.redirect("/profile")
+})
 
 export {
-    registerUser
+    registerUser,
+    fileUpload
 }

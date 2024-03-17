@@ -12,6 +12,7 @@ const renderRegisterPage = asyncHandler( async(req,res) => {
 
 
 const renderProfilePage = asyncHandler( async(req,res) => {
+    // const user = await User.findOne({username:req.session.passport.user});
     res.render("profile")
 }) 
 
