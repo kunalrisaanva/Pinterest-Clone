@@ -33,7 +33,14 @@ const userSchema = new mongoose.Schema(
         boards:{
             type:[],
             default:[]
-        }
+        },
+
+        posts:[
+            {
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"Post"
+            }
+        ]
 
     }
     

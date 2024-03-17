@@ -3,6 +3,8 @@ import {
       renderHomePage,
       renderRegisterPage,
       renderProfilePage,
+      renderAddPage,
+      renderShowPage
  } from "../controllers/renderPage.controller.js";
 
 import {
@@ -19,8 +21,14 @@ router.route("/").get(renderHomePage)
 router.route("/register").get(renderRegisterPage)
 router.route("/profile").get(renderProfilePage)
 
+router.route("/add").get(renderAddPage)
+router.route("/show/posts").get(renderShowPage)
+
+
 router.route("/fileUpload").post(upload.single("image"),fileUpload)
 
+
+router.route("/createpost").post(upload.single("postImage"),) // controller add 
 
 export default router 
 
