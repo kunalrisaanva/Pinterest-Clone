@@ -5,12 +5,16 @@ const app = express()
 
 app.set('view engine', 'ejs');
 
+app.use(express.static("public"))
+
+
 app.get("/test",function(req,res) {
-    res.render("test")
+    res.send("test")
 })
 
+
 // routes 
-import userRouter from "./routes/user.routes.js";
+import userRouter from "./routes/renderPage.routes.js";
 
 app.use(userRouter)
 
