@@ -4,7 +4,8 @@ import {
       renderRegisterPage,
       renderProfilePage,
       renderAddPage,
-      renderShowPage
+      renderShowPage,
+      renderFeedPage
  } from "../controllers/renderPage.controller.js";
 
 import {
@@ -23,6 +24,7 @@ router.route("/profile").get(renderProfilePage)
 
 router.route("/add").get(renderAddPage)
 router.route("/show/posts").get(renderShowPage)
+router.route("/feed").get(renderFeedPage)
 
 
 router.route("/fileUpload").post(upload.single("image"),fileUpload)

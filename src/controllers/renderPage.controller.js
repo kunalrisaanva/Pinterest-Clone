@@ -1,5 +1,6 @@
 import { asyncHandler } from "../utils/asynchHandler.js";
 import { User } from "../models/user.model.js";
+import { Post } from "../models/post.model.js";
 
 const renderHomePage = asyncHandler( async(req,res) => {
     res.render("index",{nav:false})
@@ -24,14 +25,24 @@ const renderAddPage = asyncHandler( async(req,res) => {
 
 const renderShowPage = asyncHandler( async(req,res) => {
     // const user = await User.findOne({username:req.session.passport.user});
-    res.render("show",{nav:true})
+    res.render("allPosts",{nav:true})
+}) 
+
+
+const renderFeedPage = asyncHandler( async(req,res) => {
+    // const user = await User.findOne({username:req.session.passport.user})
+    // const posts = await Post.find().populate("users")
+    // send data both {user,posts}
+    res.render("feed",{nav:true})
 }) 
  
+
 
 export {
     renderHomePage,
     renderRegisterPage,
     renderProfilePage,
     renderAddPage,
-    renderShowPage
+    renderShowPage,
+    renderFeedPage
 }
