@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt"
-
+import plm from "passport-local-mongoose"
 
 const userSchema = new mongoose.Schema(
     {
@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema(
 ,{timestamps:true})
 
 
+// userSchema.plugin(plm)
 
 userSchema.pre("save",async function(next){
     if (!this.isModified("password")) return next();
@@ -56,6 +57,7 @@ userSchema.pre("save",async function(next){
 userSchema.methods.isPasswordCorrect = async function(passwword){
     return await bcrypt.compare(passwword,this.password);
 }
+
 
 
 

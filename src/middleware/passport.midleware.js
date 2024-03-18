@@ -1,28 +1,23 @@
-import { Strategy as LocalStrategy } from "passport-local";
-import { User } from "../models/user.model.js";
+// var LocalStrategy = require("passport-local").Strategy
+import {Strategy as LocalStrategy } from "passport-local"
+// const passport = require("passport");
+import { User } from "../models/user.model.js"
+import bcrypt from "bcrypt"
+
 
 
 const initializePassport = (passport) => {
     try {
-        console.log("start")
         passport.use(new LocalStrategy(
             async function (username, password, done) {
-                console.log(username , "user name data ")
+                // console.log(username , "user name data ")
                 const user = await User.findOne({ email: username });
-                if (user) {
-                    const isMatch = await bcrypt.compare(password, user.password)
-                    console.log(isMatch)
-                    if(isMatch){
-                     return  done(null, user)
-                    }else{
-                        let msg = "password does not match"
-                     return   done(msg,false);
-                    }
-                } else {
-                    // let button = '/register'
-                    return done("this email not found plz try valid email", false)
-                   
-                }
+                if(!user) return done(null,false);
+
+                if(user.password !== password) return done(null,false);
+                // console.log(user)
+                return done(null , user)
+                
             }
         ));
 
@@ -45,9 +40,9 @@ const initializePassport = (passport) => {
 
 
 const isLoggedIn = (req,res,next)=>{
-    if(req.user) return next()
-    res.redirect("/")
-  }
+  if(req.user) return next()
+  res.redirect("/")
+}
 
 
 

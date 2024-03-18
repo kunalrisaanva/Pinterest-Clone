@@ -4,6 +4,7 @@ import {ApiResponse} from "../utils/ApiResponse.js"
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinaryUpload.js";
 import { Post } from "../models/post.model.js";
+import passport from "passport";
 
 
 const registerUser = asyncHandler( async(req,res) => {
@@ -26,8 +27,7 @@ const registerUser = asyncHandler( async(req,res) => {
     })
 
     console.log("user created successfully ")
-    
-    res.redirect("/profile")
+
 })
 
 
