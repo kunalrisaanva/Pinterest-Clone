@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from "bcrypt"
 
 
 const userSchema = new mongoose.Schema(
@@ -21,7 +21,6 @@ const userSchema = new mongoose.Schema(
 
         profileImage:{
             type:String,
-            rerequired:[true,"UserImage is Required"]
         },
 
         contact:{

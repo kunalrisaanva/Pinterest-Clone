@@ -17,6 +17,17 @@ const registerUser = asyncHandler( async(req,res) => {
         throw new ApiError(400, "all fields are required");
     };
 
+
+    await User.create({
+        username,
+        email,
+        contact,
+        password
+    })
+
+    console.log("user created successfully ")
+    
+    res.redirect("/profile")
 })
 
 

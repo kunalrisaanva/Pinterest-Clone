@@ -3,12 +3,14 @@ import path from "path"
 import cookieParser from "cookie-parser";
 import logger from "morgan"
 import expressSession from "express-session"
+import passport from "passport";
+import { initializePassport } from "./middleware/passport.midleware.js";
 
 
 const app = express()
 
 
-
+initializePassport(passport);
 
 app.set('view engine', 'ejs');
 
@@ -18,11 +20,12 @@ app.use(expressSession({
     secret:"kunalnameismy"
 }))
 
+
 app.use(passport.initialize())
 app.use(passport.session())
 // app.use()
 
-app.use(logger("dev"));
+// app.use(logger("dev"));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -32,7 +35,6 @@ app.use(cookieParser());
 
 // routes 
 import userRouter from "./routes/renderPage.routes.js";
-import passport from "passport";
 
 app.use(userRouter)
 
