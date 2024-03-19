@@ -14,12 +14,12 @@
                     <i class="text-zinc-800 ri-pencil-fill"></i>
                 </span>
                 <div class="w-32 h-32 bg-zinc-200 rounded-full overflow-hidden">
-                    <img class="w-full h-full object-cover" src= "/-image render-/" alt="userProfile">
+                    <img class="w-full h-full object-cover" src= "<%= user.profileImage.url%>" alt="userProfile">
                 </div>
             </div>
            
-            <h1 class="text-3xl font-semibold mt-5 text-center">Kunal jangra</h1>
-            <h3 class="text-md">@username</h3>
+            <h1 class="text-3xl font-semibold mt-5 text-center"><%= user.username%></h1>
+            <h3 class="text-md mt-3">@<%= user.fullname%></h3>
             <a href="/edit" class=" mt-5 px-7 py-2 bg-zinc-700 rounded-full text-xs font-semibold hover:bg-red-900">Edit</a>
             <a class="px-10 py-2 rounded-lg bg-red-700 text-xm font-semibold  mt-6 hover:bg-red-900" href="/add">Add New Post</a>
         </div>
@@ -27,18 +27,11 @@
         <div class="cards flex flex-wrap gap-10 px-10 mt-10">
             <div class="card">
                 <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden ">
-                    <img class="w-full h-full object-cover" src="/-images rendeor optional condition-/" alt="">
+                    <img class="w-full h-full object-cover" src="<%= user?.posts[0]?.image.url %>" alt="">
                 </div>
                 <a href="/show/posts" class=" inline-block  font-semibold mt-3">Your Uploaded Pins</a>
-                <h5 class="text-sm font-medium ">1 Pins render</h5>
+                <h5 class="text-sm font-medium "> <%= user.posts.length%> Pins </h5>
              
-            </div>
-            <div class="card">
-                <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden ">
-                    <!-- <img class="w-full h-full object-cover" src="" alt=""> -->
-                </div>
-                <h3 class="text-xl font-semibold mt-3">All Pins</h3>
-                <h5 class="text-sm font-medium ">23 Pins</h5>
             </div>
         </div>
 </div>

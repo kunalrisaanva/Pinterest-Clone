@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema(
             type:String,
             required:[true,"username is Required"]
         },
+        
+        fullname:{
+            type:String,
+            required:[true,"email is Required"]
+        },
 
         email:{
             type:String,
@@ -20,7 +25,14 @@ const userSchema = new mongoose.Schema(
         },
 
         profileImage:{
-            type:String,
+
+            publicId:{
+                type:String
+            },
+
+            url:{
+                type:String
+            }
         },
 
         contact:{

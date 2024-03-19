@@ -13,9 +13,10 @@ const initializePassport = (passport) => {
                 // console.log(username , "user name data ")
                 const user = await User.findOne({ email: username });
                 if(!user) return done(null,false);
-
-                if(user.password !== password) return done(null,false);
-                // console.log(user)
+                
+                const isMatch = user.isPasswordCorrect(password)
+                if(!isMatch) return done(null,false);
+            
                 return done(null , user)
                 
             }

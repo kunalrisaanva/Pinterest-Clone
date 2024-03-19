@@ -20,8 +20,13 @@ const postSchema = new mongoose.Schema(
         },
 
         image:{
+           publicId:{
+            type:String
+           },
+           url:{
             type:String,
             rerequired:[true,"UserImage is Required"]
+           }
         },
 
      

@@ -13,27 +13,28 @@ const renderRegisterPage = asyncHandler( async(req,res) => {
 
 
 const renderProfilePage = asyncHandler( async(req,res) => {
-    // const user = await User.findOne({username:req.session.passport.user}).populate("posts")
-    res.render("profile",{nav:true})
+    const user = await User.findOne({username:req.user?.username}).populate("posts")
+    res.render("profile",{user,nav:true})
 }) 
 
 const renderAddPage = asyncHandler( async(req,res) => {
-    // const user = await User.findOne({username:req.session.passport.user});
-    res.render("add",{nav:true})
+    const user = await User.findOne({username:req.user?.username});
+    res.render("add",{user,nav:true})
 }) 
 
 
 const renderShowPage = asyncHandler( async(req,res) => {
-    // const user = await User.findOne({username:req.session.passport.user});
-    res.render("allPosts",{nav:true})
+    const user = await User.findOne({username:req.user?.username}).populate("posts")
+    res.render("allPosts",{user,nav:true})
 }) 
 
 
 const renderFeedPage = asyncHandler( async(req,res) => {
-    // const user = await User.findOne({username:req.session.passport.user})
-    // const posts = await Post.find().populate("users")
+    const user = await User.findOne({username:req.user?.username});
+    const posts = await Post.find().populate("user")
+    // console.log(posts)
     // send data both {user,posts}
-    res.render("feed",{nav:true})
+    res.render("feed",{user,posts,nav:true})
 }) 
  
 

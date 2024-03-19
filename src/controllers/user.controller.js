@@ -8,10 +8,10 @@ import passport from "passport";
 
 
 const registerUser = asyncHandler( async(req,res) => {
-    const { username,email,contact,password } = req.body;
+    const { username,email,contact,password ,fullname} = req.body;
 
     if (
-        [username, email, contact, password].some(
+        [username, email, contact, password , fullname].some(
             (fields) => fields?.trim() === "" || undefined
         )
     ) {
@@ -21,12 +21,15 @@ const registerUser = asyncHandler( async(req,res) => {
 
     await User.create({
         username,
+        fullname,
         email,
         contact,
         password
     })
 
     console.log("user created successfully ")
+
+    res.redirect("/")
 
 })
 
@@ -35,11 +38,26 @@ const fileUpload = asyncHandler(async (req,res) => {
 
     //todo: save inito cloudinary 
 
-    const user = await User.findOne({username:req.session.passport.user});
+    const user = await User.findOne({username:req.user?.username});
 
-    user.profileImage = req.file?.filename
+    // console.log()
+
+    // console.log(req.file)
+
+    let response
+
+    if(req?.file){
+        response = await uploadOnCloudinary(req.file.path)
+    }
+
+    // console.log(response);
+
+
+    user.profileImage.publicId = response.public_id
+    user.profileImage.url = response.url
 
     user.save({validateBeforeSave:false});
+
 
     res.redirect("/profile")
 })
@@ -48,16 +66,33 @@ const fileUpload = asyncHandler(async (req,res) => {
 const createPost  = asyncHandler( async(req,res) => {
 
     const {title ,descriptions } = req.body
-    const user = await User.findOne({username:req.session.passport.user});
+    const user = await User.findOne({username:req.user?.username});
+    // console.log(user);
+
+    console.log(res.file)
+    console.log(req.file?.postImage)
+
+    let response
+
+    if(req?.file){
+        response = await uploadOnCloudinary(req.file.path)
+    }
+
+
+    // console.log(response);
 
     const createdPost = await Post.create({
             user:user._id,
             title,
             descriptions,
-            image: ""   // cloudinary url 
+            // image.url: response?.url || ""  // cloudinary url 
+            "image.publicId":response?.public_id || "",
+            "image.url": response?.url || ""
         });
 
-    user.posts.push(createPost._id);
+
+   
+    user.posts.push(createdPost._id);
 
     await user.save({validateBeforeSave:false});
 
@@ -70,5 +105,6 @@ const createPost  = asyncHandler( async(req,res) => {
 
 export {
     registerUser,
-    fileUpload
+    fileUpload,
+    createPost
 }

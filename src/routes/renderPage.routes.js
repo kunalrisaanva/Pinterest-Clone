@@ -10,7 +10,8 @@ import {
 
 import {
       registerUser,
-      fileUpload
+      fileUpload,
+      createPost
 } from "../controllers/user.controller.js" 
 
 
@@ -41,15 +42,15 @@ router.get('/logout', function (req, res){
 
 router.route("/profile").get(isLoggedIn,renderProfilePage)
 
-router.route("/add").get(renderAddPage)
-router.route("/show/posts").get(renderShowPage)
-router.route("/feed").get(renderFeedPage)
+router.route("/add").get(isLoggedIn,renderAddPage)
+router.route("/show/posts").get(isLoggedIn,renderShowPage)
+router.route("/feed").get(isLoggedIn,renderFeedPage)
 
 
-router.route("/fileUpload").post(upload.single("image"),fileUpload)
+router.route("/fileUpload").post(isLoggedIn,upload.single("image"),fileUpload)
 
 
-router.route("/createpost").post(upload.single("postImage"),) // controller add 
+router.route("/createpost").post(isLoggedIn,upload.single("postImage"),createPost) // controller add 
 
 
 export default router 
