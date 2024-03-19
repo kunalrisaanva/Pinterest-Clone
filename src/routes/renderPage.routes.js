@@ -50,7 +50,7 @@ router.route("/feed").get(isLoggedIn,renderFeedPage)
 router.route("/fileUpload").post(isLoggedIn,upload.single("image"),fileUpload)
 
 
-router.route("/createpost").post(isLoggedIn,upload.single("postImage"),createPost) // controller add 
+router.route("/createpost").post(isLoggedIn,upload.single("postImage"),createPost) 
 
 
 export default router 

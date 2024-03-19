@@ -14,7 +14,7 @@
                     <i class="text-zinc-800 ri-pencil-fill"></i>
                 </span>
                 <div class="w-32 h-32 bg-zinc-200 rounded-full overflow-hidden">
-                    <img class="w-full h-full object-cover" src= "<%= user.profileImage.url%>" alt="userProfile">
+                    <img id="profileImage" class="w-full h-full object-cover" src= "<%= user.profileImage.url%>" alt="userProfile">
                 </div>
             </div>
            
@@ -27,7 +27,7 @@
         <div class="cards flex flex-wrap gap-10 px-10 mt-10">
             <div class="card">
                 <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden ">
-                    <img class="w-full h-full object-cover" src="<%= user?.posts[0]?.image.url %>" alt="">
+                    <img class="w-full h-full object-cover" src="<%= user?.posts[0]?.image.url %>" alt="pin" />
                 </div>
                 <a href="/show/posts" class=" inline-block  font-semibold mt-3">Your Uploaded Pins</a>
                 <h5 class="text-sm font-medium "> <%= user.posts.length%> Pins </h5>
@@ -48,6 +48,13 @@
         document.querySelector("#uploadForm").submit();
     
     })
+
+    const img = document.getElementById("image")
+    img.addEventListener("error", function(event) {
+    event.target.src = "https://i.pinimg.com/564x/1c/0f/cc/1c0fcc154ea6429c26b124371e463e9d.jpg"
+    event.onerror = null
+    })
+
 
 </script>
 
