@@ -4,7 +4,7 @@ import {ApiResponse} from "../utils/ApiResponse.js"
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinaryUpload.js";
 import { Post } from "../models/post.model.js";
-import passport from "passport";
+
 
 
 const registerUser = asyncHandler( async(req,res) => {
@@ -36,21 +36,15 @@ const registerUser = asyncHandler( async(req,res) => {
 
 const fileUpload = asyncHandler(async (req,res) => {
 
-    //todo: save inito cloudinary 
-
+   
     const user = await User.findOne({username:req.user?.username});
 
-    // console.log()
-
-    // console.log(req.file)
-
+   
     let response
 
     if(req?.file){
         response = await uploadOnCloudinary(req.file.path)
     }
-
-    // console.log(response);
 
 
     user.profileImage.publicId = response.public_id
@@ -59,7 +53,8 @@ const fileUpload = asyncHandler(async (req,res) => {
     user.save({validateBeforeSave:false});
 
 
-    res.redirect("/profile")
+    res.redirect("/profile");
+
 })
 
 
@@ -79,8 +74,6 @@ const createPost  = asyncHandler( async(req,res) => {
     }
 
 
-    // console.log(response);
-
     const createdPost = await Post.create({
             user:user._id,
             title,
@@ -99,6 +92,7 @@ const createPost  = asyncHandler( async(req,res) => {
     res.redirect("/profile")
 
 })
+
 
 
 

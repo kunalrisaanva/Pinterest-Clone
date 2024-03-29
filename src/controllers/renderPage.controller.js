@@ -32,8 +32,6 @@ const renderShowPage = asyncHandler( async(req,res) => {
 const renderFeedPage = asyncHandler( async(req,res) => {
     const user = await User.findOne({username:req.user?.username});
     const posts = await Post.find().populate("user")
-    // console.log(posts)
-    // send data both {user,posts}
     res.render("feed",{user,posts,nav:true})
 }) 
  

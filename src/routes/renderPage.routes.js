@@ -17,9 +17,9 @@ import {
 
 import { isLoggedIn } from "../middleware/passport.midleware.js";
 import { upload } from "../middleware/multer.middleware.js"
-import {Strategy as LocalStrategy } from "passport-local"
+
 import passport from "passport";
-import { User } from "../models/user.model.js";
+
 
 
 const router = Router();
